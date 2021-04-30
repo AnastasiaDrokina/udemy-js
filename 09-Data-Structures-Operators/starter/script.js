@@ -1,4 +1,19 @@
 'use strict';
+const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const openingHours = {
+  [weekdays[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [weekdays[6]]: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
 
 const restaurant = {
   name: 'Classico Italiano',
@@ -6,46 +21,41 @@ const restaurant = {
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
 
-  order: function (starterIndex, mainIndex) {
+  // ES6 enchanged object literals
+  openingHours,
+
+  order(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
 
-  orderDelivery: function ({
-    starterIndex = 1,
-    mainIndex = 0,
-    time = '20:00',
-    address,
-  }) {
+  orderDelivery({ starterIndex = 1, mainIndex = 0, time = '20:00', address }) {
     console.log(
       `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered ti ${address} at ${time}`
     );
   },
 
-  orderPasta: function (ing1, ing2, ing3) {
+  orderPasta(ing1, ing2, ing3) {
     console.log(
       `Here is your declicious pasta with ${ing1}, ${ing2} and ${ing3}`
     );
   },
 
-  orderPizza: function (mainIngredient, ...otherIngredient) {
+  orderPizza(mainIngredient, ...otherIngredient) {
     console.log(mainIngredient, otherIngredient);
   },
 };
+
+// Looping Arrays: The for-of Loop
+// const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+// for (const item of menu) console.log(item);
+
+// for (const [i, el] of menu.entries()) {
+//   console.log(`${i + 1}: ${el}`);
+// }
+
+// console.log([...menu.entries()]);
 
 ///////////////////////////////////////
 // Coding Challenge #1
@@ -68,81 +78,81 @@ TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Th
 GOOD LUCK 😀
 */
 
-const game = {
-  team1: 'Bayern Munich',
-  team2: 'Borrussia Dortmund',
-  players: [
-    [
-      'Neuer',
-      'Pavard',
-      'Martinez',
-      'Alaba',
-      'Davies',
-      'Kimmich',
-      'Goretzka',
-      'Coman',
-      'Muller',
-      'Gnarby',
-      'Lewandowski',
-    ],
-    [
-      'Burki',
-      'Schulz',
-      'Hummels',
-      'Akanji',
-      'Hakimi',
-      'Weigl',
-      'Witsel',
-      'Hazard',
-      'Brandt',
-      'Sancho',
-      'Gotze',
-    ],
-  ],
-  score: '4:0',
-  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
-  date: 'Nov 9th, 2037',
-  odds: {
-    team1: 1.33,
-    x: 3.25,
-    team2: 6.5,
-  },
-};
+// const game = {
+//   team1: 'Bayern Munich',
+//   team2: 'Borrussia Dortmund',
+//   players: [
+//     [
+//       'Neuer',
+//       'Pavard',
+//       'Martinez',
+//       'Alaba',
+//       'Davies',
+//       'Kimmich',
+//       'Goretzka',
+//       'Coman',
+//       'Muller',
+//       'Gnarby',
+//       'Lewandowski',
+//     ],
+//     [
+//       'Burki',
+//       'Schulz',
+//       'Hummels',
+//       'Akanji',
+//       'Hakimi',
+//       'Weigl',
+//       'Witsel',
+//       'Hazard',
+//       'Brandt',
+//       'Sancho',
+//       'Gotze',
+//     ],
+//   ],
+//   score: '4:0',
+//   scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+//   date: 'Nov 9th, 2037',
+//   odds: {
+//     team1: 1.33,
+//     x: 3.25,
+//     team2: 6.5,
+//   },
+// };
 
-// 1.
-const [players1, players2] = game.players;
-console.log(players1, players2);
+// // 1.
+// const [players1, players2] = game.players;
+// console.log(players1, players2);
 
-// 2.
-const [gk, ...fieldPlayers] = players1;
-console.log(gk, fieldPlayers);
+// // 2.
+// const [gk, ...fieldPlayers] = players1;
+// console.log(gk, fieldPlayers);
 
-// 3.
-const allPlayers = [...players1, ...players2];
-console.log(allPlayers);
+// // 3.
+// const allPlayers = [...players1, ...players2];
+// console.log(allPlayers);
 
-// 4.
-const players1Final = [...players1, 'Thiago', 'Coutinho', 'Periscic'];
+// // 4.
+// const players1Final = [...players1, 'Thiago', 'Coutinho', 'Periscic'];
 
-// 5.
-const {
-  odds: { team1, x: draw, team2 },
-} = game;
-console.log(team1, draw, team2);
+// // 5.
+// const {
+//   odds: { team1, x: draw, team2 },
+// } = game;
+// console.log(team1, draw, team2);
 
-// 6.
-const printGoals = function (...players) {
-  console.log(players);
-  console.log(`${players.length} goals were scored`);
-};
+// // 6.
+// const printGoals = function (...players) {
+//   console.log(players);
+//   console.log(`${players.length} goals were scored`);
+// };
 
-// printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
-// printGoals('Davies', 'Muller');
-printGoals(...game.scored);
+// // printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
+// // printGoals('Davies', 'Muller');
+// printGoals(...game.scored);
 
-// 7.
-team1 < team2 && console.log('Team 1 is more likely to win');
-team1 > team2 && console.log('Team 2 is more likely to win');
+// // 7.
+// team1 < team2 && console.log('Team 1 is more likely to win');
+// team1 > team2 && console.log('Team 2 is more likely to win');
 
 // // restaurant.numGuests = 0;
 // const guests = restaurant.numGuests || 10;
