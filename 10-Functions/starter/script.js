@@ -58,28 +58,45 @@
 // checkIn(flight, jonas);
 
 // Functions Accepting Callback Functions
-const oneWord = function (str) {
-  return str.replace(/ /g, '').toLowerCase();
+// const oneWord = function (str) {
+//   return str.replace(/ /g, '').toLowerCase();
+// };
+
+// const upperFirstWord = function (str) {
+//   const [first, ...others] = str.split(' ');
+//   return [first.toUpperCase(), ...others].join(' ');
+// };
+
+// // Higher-order function
+// const trasformer = function (str, fn) {
+//   console.log(`Original string: ${str}`);
+//   console.log(`Transformed string: ${fn(str)}`);
+//   console.log(`Trasformed by: ${fn.name}`);
+// };
+
+// trasformer('JavaScript is the best!', upperFirstWord);
+// trasformer('JavaScript is the best!', oneWord);
+
+// // JS uses callbacks all the time
+// const hight5 = function () {
+//   console.log('haha');
+// };
+// document.body.addEventListener('click', hight5);
+// ['Jonas', 'Martha', 'Adam'].forEach(hight5);
+
+// Functions Returning Functions
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
 };
 
-const upperFirstWord = function (str) {
-  const [first, ...others] = str.split(' ');
-  return [first.toUpperCase(), ...others].join(' ');
-};
+const greeterHey = greet('Hey');
+greeterHey('Jonas');
+greeterHey('Steven');
 
-// Higher-order function
-const trasformer = function (str, fn) {
-  console.log(`Original string: ${str}`);
-  console.log(`Transformed string: ${fn(str)}`);
-  console.log(`Trasformed by: ${fn.name}`);
-};
+greet('Hello')('Jonas');
 
-trasformer('JavaScript is the best!', upperFirstWord);
-trasformer('JavaScript is the best!', oneWord);
-
-// JS uses callbacks all the time
-const hight5 = function () {
-  console.log('haha');
-};
-document.body.addEventListener('click', hight5);
-['Jonas', 'Martha', 'Adam'].forEach(hight5);
+// Chalenge
+const greetArr = greeting => name => console.log(`${greeting} ${name}`);
+greetArr('Hi')('Jonas');
